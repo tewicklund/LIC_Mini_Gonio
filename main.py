@@ -34,45 +34,48 @@ while not num_angles_valid:
 print(f"Will test at {num_angles} angles.")
 
 #get COM port for PCL from user
-PCL_port_name_valid=False
-while not PCL_port_name_valid:
-    serial_port_list=get_serial_port_list()
-    print("Serial port list: ",serial_port_list)
-    PCL_port_name_input=input("Type name of PCL COM port (COM#): ")
-    if PCL_port_name_input in serial_port_list:
-        PCL_port_name_valid=True
-        PCL_port_name=PCL_port_name_input
-        print(f"Confirmed port {PCL_port_name}")
-    else:
-        print("Invalid port name, try again")
+PCL_port_name='/dev/ttyUSB0'
+# PCL_port_name_valid=False
+# while not PCL_port_name_valid:
+#     serial_port_list=get_serial_port_list()
+#     print("Serial port list: ",serial_port_list)
+#     PCL_port_name_input=input("Type name of PCL COM port (COM#): ")
+#     if PCL_port_name_input in serial_port_list:
+#         PCL_port_name_valid=True
+#         PCL_port_name=PCL_port_name_input
+#         print(f"Confirmed port {PCL_port_name}")
+#     else:
+#         print("Invalid port name, try again")
 
 
 #get COM port for T10A from user
-T10A_port_name_valid=False
-while not T10A_port_name_valid:
-    serial_port_list=get_serial_port_list()
-    print("Serial port list: ",serial_port_list)
-    T10A_port_name_input=input("Type name of T10A COM port (COM#): ")
-    if T10A_port_name_input in serial_port_list:
-        T10A_port_name_valid=True
-        T10A_port_name=T10A_port_name_input
-        print(f"Confirmed port {T10A_port_name}")
-    else:
-        print("Invalid port name, try again")
+T10A_port_name='/dev/ttyUSB1'
+# T10A_port_name_valid=False
+# while not T10A_port_name_valid:
+#     serial_port_list=get_serial_port_list()
+#     print("Serial port list: ",serial_port_list)
+#     T10A_port_name_input=input("Type name of T10A COM port (COM#): ")
+#     if T10A_port_name_input in serial_port_list:
+#         T10A_port_name_valid=True
+#         T10A_port_name=T10A_port_name_input
+#         print(f"Confirmed port {T10A_port_name}")
+#     else:
+#         print("Invalid port name, try again")
 
 
 #get COM port for dimming_arduino from user
-dimming_arduino_port_name_valid=False
-while not dimming_arduino_port_name_valid:
-    serial_port_list=get_serial_port_list()
-    print("Serial port list: ",serial_port_list)
-    dimming_arduino_port_name_input=input("Type name of dimming_arduino COM port (COM#): ")
-    if dimming_arduino_port_name_input in serial_port_list:
-        dimming_arduino_port_name_valid=True
-        dimming_arduino_port_name=dimming_arduino_port_name_input
-        print(f"Confirmed port {dimming_arduino_port_name}")
-    else:
-        print("Invalid port name, try again")
+dimming_arduino_port_name='/dev/ttyUSB2'
+# dimming_arduino_port_name_valid=False
+# while not dimming_arduino_port_name_valid:
+#     serial_port_list=get_serial_port_list()
+#     print("Serial port list: ",serial_port_list)
+#     dimming_arduino_port_name_input=input("Type name of dimming_arduino COM port (COM#): ")
+#     if dimming_arduino_port_name_input in serial_port_list:
+#         dimming_arduino_port_name_valid=True
+#         dimming_arduino_port_name=dimming_arduino_port_name_input
+#         print(f"Confirmed port {dimming_arduino_port_name}")
+#     else:
+#         print("Invalid port name, try again")
 
 #get file name to store the logs, stored in local directory
 log_file_name=input("Enter log file name (ex. mini_gonio_log.csv): ")
