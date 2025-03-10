@@ -84,7 +84,7 @@ def PCL_send_motor_command(serial_object,command):
 
     # write ascii command to unit
     serial_object.write(command_string_bytes)
-    print("Wrote command:",command_string_bytes)
+    #print("Wrote command:",command_string_bytes)
 
     #short delay to wait for response
     time.sleep(0.01)
@@ -96,11 +96,11 @@ def PCL_send_motor_command(serial_object,command):
     response_string=received_string_bytes.decode().removesuffix('\r').removeprefix(' ')
 
     # print response if there is one
-    if response_string == '':
-        print("No response received")
+    # if response_string == '':
+    #     print("No response received")
         
-    else:
-        print("Response received:",response_string)
+    # else:
+    #     print("Response received:",response_string)
 
     # return the response string
     return response_string
@@ -213,18 +213,18 @@ def t10a_translate_response(response):
         print("Normal Operation: no errors detected")
 
     # Figure out measurement range
-    print("\nChecking measurement range...")
     range_code = response[7]
-    if range_code == 49:  # 1
-        print("Range 0.00 to 29.99 lx")
-    elif range_code == 50:  # 2
-        print("Range 0.0 to 299.9 lx")
-    elif range_code == 51:  # 3
-        print("Range 0 to 2,999 lx")
-    elif range_code == 52:  # 4
-        print("Range 00 to 29,990 lx")
-    elif range_code == 53:  # 5
-        print("Range 000 to 299,900 lx")
+    # print("\nChecking measurement range...")
+    # if range_code == 49:  # 1
+    #     print("Range 0.00 to 29.99 lx")
+    # elif range_code == 50:  # 2
+    #     print("Range 0.0 to 299.9 lx")
+    # elif range_code == 51:  # 3
+    #     print("Range 0 to 2,999 lx")
+    # elif range_code == 52:  # 4
+    #     print("Range 00 to 29,990 lx")
+    # elif range_code == 53:  # 5
+    #     print("Range 000 to 299,900 lx")
 
     # Format the measurement data
     sym = response[9]  # find the +, -, or =
