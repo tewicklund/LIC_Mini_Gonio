@@ -355,7 +355,7 @@ def get_detailed_serial_ports_list():
     for port in ports:
         print(f"Device: {port.device}, Description: {port.description}, HWID: {port.hwid}")
 
-def run_test(PCL_serial_port,t10a_serial_port,arduino_serial_port,warm_up_time,num_angles,output_csv_location):
+def run_test(light_voltage,PCL_serial_port,t10a_serial_port,arduino_serial_port,warm_up_time,num_angles,output_csv_location):
 
     # start serial connection
     PCL_serial=PCL_establish_serial_connection(PCL_serial_port)
@@ -375,7 +375,9 @@ def run_test(PCL_serial_port,t10a_serial_port,arduino_serial_port,warm_up_time,n
 
     # format output file with ambient light and column labels
     f=open(output_csv_location,"w")
-    f.write('Ambient Lux: '+str(lx_value)+'\n'+'Target Angle,Encoder Reading,Lux Value,Dimming Voltage,UUT Lux Value\n')
+    f.write('Ambient Lux: '+str(lx_value)+'\n')
+    f.write('Voltage: '+str(light_voltage)+'\n')
+    f.write('Target Angle,Encoder Reading,Lux Value,Dimming Voltage,UUT Lux Value\n')
     f.close()
 
 

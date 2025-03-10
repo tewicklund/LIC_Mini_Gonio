@@ -84,5 +84,5 @@ if log_file_name=='':
 
 
 #run test
-run_test(PCL_port_name,T10A_port_name,dimming_arduino_port_name,warm_up_time_seconds,num_angles,log_file_name)
+run_test(light_voltage,PCL_port_name,T10A_port_name,dimming_arduino_port_name,warm_up_time_seconds,num_angles,log_file_name)
 
