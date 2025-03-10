@@ -1,6 +1,4 @@
 from functions import *
-from tkinter import Tk, filedialog
-Tk().withdraw()
 
 #set tungsten halogen lamp warm-up time
 #warm_up_time_minutes=5
@@ -76,14 +74,12 @@ while not dimming_arduino_port_name_valid:
     else:
         print("Invalid port name, try again")
 
-#get directory and file name to store the logs
+#get file name to store the logs, stored in local directory
 log_file_name=input("Enter log file name (ex. mini_gonio_log.csv): ")
 if log_file_name=='':
     log_file_name='mini_gonio_log.csv'
-log_file_directory=filedialog.askdirectory()
-log_file_path=log_file_directory+'/'+log_file_name
 
 
 #run test
-run_test(PCL_port_name,T10A_port_name,dimming_arduino_port_name,warm_up_time_seconds,num_angles,log_file_path)
+run_test(PCL_port_name,T10A_port_name,dimming_arduino_port_name,warm_up_time_seconds,num_angles,log_file_name)
 
