@@ -3,8 +3,9 @@ from tkinter import Tk, filedialog
 Tk().withdraw()
 
 #set tungsten halogen lamp warm-up time
-warm_up_time_minutes=5
-warm_up_time_seconds=warm_up_time_minutes*60
+#warm_up_time_minutes=5
+#warm_up_time_seconds=warm_up_time_minutes*60
+warm_up_time_seconds=5
 
 #get light voltage from user and check that it is in range
 light_voltage_valid=False

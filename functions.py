@@ -342,6 +342,14 @@ def get_serial_port_list():
     com_ports = [port.device for port in ports]
     return com_ports
 
+def get_detailed_serial_ports_list():
+    # Get a list of available ports
+    ports = serial.tools.list_ports.comports()
+
+    # Iterate and print port info
+    for port in ports:
+        print(f"Device: {port.device}, Description: {port.description}, HWID: {port.hwid}")
+
 def run_test(PCL_serial_port,t10a_serial_port,arduino_serial_port,warm_up_time,num_angles,output_csv_location):
 
     # start serial connection
