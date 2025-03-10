@@ -142,10 +142,15 @@ def PCL_home_motor(serial_object):
 
 def PCL_get_encoder_angle(serial_object):
     encoder_angle_string=PCL_send_motor_command(serial_object,'VEP')
-    try:
-        return int(encoder_angle_string)
-    except:
-        return('none')
+    encoder_angle_valid=False
+    tries=0
+    while not encoder_angle_valid and tries<10:
+        try:
+            return int(encoder_angle_string)
+        except:
+            print("retrying encoder angle fetch")
+            tries+=1
+    return 0
 
 def PCL_go_to_angle(serial_object, angle_steps):
     command_string='P'+str(angle_steps)
@@ -387,6 +392,7 @@ def run_test(PCL_serial_port,t10a_serial_port,arduino_serial_port,warm_up_time,n
         for angle in angles:
             angle_steps=int(angle/0.009)
             PCL_go_to_angle(PCL_serial,angle_steps)
+            time.sleep(5) #5 seconds for settling, letting the dimming wires adjust to the new light position
             lx_value=t10a_get_lx_measurement(t10a_serial)
             lx_value_rounded=round(lx_value,2)
             encoder_value=PCL_get_encoder_angle(PCL_serial)
