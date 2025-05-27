@@ -92,23 +92,8 @@ def PCL_send_command_no_response(serial_object,command_string):
     time.sleep(0.1)
 
 
-def PCL_send_motor_command(serial_object,command_string):
-    command="@0X"+command_string+"\r\n"
-    serial_object.write(command.encode())
-    time.sleep(0.1)
-
-    # Read the response
-    response = serial_object.read(64)  # Adjust byte count as needed
-    response_string=response.decode(errors='ignore')
-    #print("Response:", response.decode(errors='ignore'))
-    return response_string
-
 def PCL_home_motor(serial_object):
-    # set the various speed values
-    PCL_send_command_no_response(serial_object,'B250')
-    PCL_send_command_no_response(serial_object,'J750')
-    PCL_send_command_no_response(serial_object,'M2000')
-
+    
     # set direction of travel toward the home switch
     PCL_send_command_no_response(serial_object,'-')
     time.sleep(0.1)
@@ -167,10 +152,10 @@ def PCL_go_to_angle(serial_object, angle_steps):
         #print(get_encoder_angle(serial_object))
         time.sleep(1)
 
-def PCL_set_motor_speed(serial_object, speed):
-    command_string='M'+str(speed)
+def PCL_set_motor_speed(serial_object, max_speed, base_speed):
+    command_string='M'+str(max_speed)
     PCL_send_command_no_response(serial_object,command_string)
-    command_string='J'+str(speed)
+    command_string='B'+str(base_speed)
     PCL_send_command_no_response(serial_object,command_string)
     time.sleep(0.1)
 
@@ -378,6 +363,12 @@ def run_test(light_voltage,PCL_serial_port,t10a_serial_port,arduino_serial_port,
     f.write('Voltage: '+str(light_voltage)+'\n')
     f.write('Target Angle,Encoder Reading,Lux Value,Dimming Voltage,UUT Lux Value\n')
     f.close()
+
+    #set motor base speed and max speed
+    if demo_mode:
+        PCL_set_motor_speed(PCL_serial,1500,250)
+    else:
+        PCL_set_motor_speed(PCL_serial,750,250)
 
 
     # run test for each light and each angle
