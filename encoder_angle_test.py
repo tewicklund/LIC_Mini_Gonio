@@ -11,7 +11,7 @@ ser = serial.Serial(
 )
 
 # Send a known-good command (e.g., read inputs)
-command = '@0IR\r\n'
+command = '@0VEP\r\n'
 ser.write(command.encode())
 
 # Read the response
