@@ -5,6 +5,8 @@ from functions import *
 #warm_up_time_seconds=warm_up_time_minutes*60
 warm_up_time_seconds=5
 
+user_input_bool=False
+
 #get light voltage from user and check that it is in range
 light_voltage_valid=False
 while not light_voltage_valid:
@@ -46,5 +48,5 @@ if log_file_name=='':
 
 
 #run test
-run_test(light_voltage,PCL_port_name,T10A_port_name,dimming_arduino_port_name,warm_up_time_seconds,num_angles,log_file_name)
+run_test(light_voltage,PCL_port_name,T10A_port_name,dimming_arduino_port_name,warm_up_time_seconds,num_angles,log_file_name,user_input_bool)
 

@@ -354,7 +354,7 @@ def get_detailed_serial_ports_list():
     for port in ports:
         print(f"Device: {port.device}, Description: {port.description}, HWID: {port.hwid}")
 
-def run_test(light_voltage,PCL_serial_port,t10a_serial_port,arduino_serial_port,warm_up_time,num_angles,output_csv_location):
+def run_test(light_voltage,PCL_serial_port,t10a_serial_port,arduino_serial_port,warm_up_time,num_angles,output_csv_location,user_input):
 
     # start serial connection
     PCL_serial=PCL_establish_serial_connection(PCL_serial_port)
@@ -398,7 +398,10 @@ def run_test(light_voltage,PCL_serial_port,t10a_serial_port,arduino_serial_port,
             lx_value_rounded=round(lx_value,2)
             encoder_value=PCL_get_encoder_angle(PCL_serial)
             dimming_voltage_value=get_voltage_from_arduino(arduino_serial)
-            uut_lx_value=get_uut_lx_value_from_user()
+            if user_input:
+                uut_lx_value=get_uut_lx_value_from_user()
+            else:
+                uut_lx_value='0'
             # put code here to get the reading from the UUT's daylight sensor
             f=open(output_csv_location,"a")
             f.write(str(angle)+','+str(encoder_value)+','+str(lx_value_rounded)+','+str(dimming_voltage_value)+','+str(uut_lx_value)+'\n')
