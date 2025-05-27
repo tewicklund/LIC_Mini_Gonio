@@ -1,7 +1,7 @@
 import serial
 import time
 
-command=input('Enter Full Command: ')
+command=input('Enter Command without @ or \r\n: ')
 # Open the serial port
 ser = serial.Serial(
     port='/dev/ttyUSB0',  # or COMx on Windows
@@ -13,6 +13,7 @@ ser = serial.Serial(
 )
 
 # Send a known-good command (e.g., read inputs)
+command = '@'+command+'\r\n'
 ser.write(command.encode())
 time.sleep(0.1)
 
