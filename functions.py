@@ -77,7 +77,7 @@ def PCL_establish_serial_connection(com_port):
 
 
 def PCL_send_motor_command(serial_object,command_string):
-    command="@0X"+command_string+"\r"
+    command="@0X"+command_string+"\r\n"
     serial_object.write(command.encode())
     time.sleep(0.1)
 
