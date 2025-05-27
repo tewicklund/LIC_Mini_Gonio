@@ -37,20 +37,20 @@ if not demo_mode:
         except:
             print("Invalid number of angles, try again")
     print(f"Will test at {num_angles} angles.")
+
+    #get file name to store the logs, stored in local directory
+    log_file_name=input("Enter log file name (ex. mini_gonio_log.csv): ")
+    if log_file_name=='':
+        log_file_name='mini_gonio_log.csv'
 else:
     light_voltage=12
     num_angles=2
+    log_file_name='mini_gonio_demo_log.csv'
 
 #COM port names: plug in PCL first, then T10A, then arduino
 PCL_port_name='/dev/ttyUSB0'
 T10A_port_name='/dev/ttyUSB1'
 dimming_arduino_port_name='/dev/ttyUSB2'
-
-
-#get file name to store the logs, stored in local directory
-log_file_name=input("Enter log file name (ex. mini_gonio_log.csv): ")
-if log_file_name=='':
-    log_file_name='mini_gonio_log.csv'
 
 
 #run test
