@@ -354,7 +354,7 @@ def get_detailed_serial_ports_list():
     for port in ports:
         print(f"Device: {port.device}, Description: {port.description}, HWID: {port.hwid}")
 
-def run_test(light_voltage,PCL_serial_port,t10a_serial_port,arduino_serial_port,warm_up_time,num_angles,output_csv_location,user_input):
+def run_test(light_voltage,PCL_serial_port,t10a_serial_port,arduino_serial_port,warm_up_time,num_angles,output_csv_location,user_input,demo_mode):
 
     # start serial connection
     PCL_serial=PCL_establish_serial_connection(PCL_serial_port)
@@ -384,7 +384,8 @@ def run_test(light_voltage,PCL_serial_port,t10a_serial_port,arduino_serial_port,
     for light in lights:
         PCL_turn_light_on(PCL_serial,light)
         PCL_home_motor(PCL_serial)
-        time.sleep(warm_up_time)
+        if not demo_mode:
+            time.sleep(warm_up_time)
 
         f=open(output_csv_location,"a")
         f.write("Light "+str(light)+'\n')
@@ -393,7 +394,8 @@ def run_test(light_voltage,PCL_serial_port,t10a_serial_port,arduino_serial_port,
         for angle in angles:
             angle_steps=int(angle/0.009)
             PCL_go_to_angle(PCL_serial,angle_steps)
-            time.sleep(5) #5 seconds for settling, letting the dimming wires adjust to the new light position
+            if not demo_mode:
+                time.sleep(5) #5 seconds for settling, letting the dimming wires adjust to the new light position
             lx_value=t10a_get_lx_measurement(t10a_serial)
             lx_value_rounded=round(lx_value,2)
             encoder_value=PCL_get_encoder_angle(PCL_serial)
