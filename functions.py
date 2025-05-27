@@ -124,10 +124,10 @@ def PCL_home_motor(serial_object):
 
 def PCL_get_encoder_angle(serial_object):
     encoder_angle_string=PCL_send_motor_command(serial_object,'VEP')
-    encoder_angle_valid=False
     tries=0
-    while not encoder_angle_valid and tries<10:
+    while tries<10:
         try:
+            encoder_angle_string=PCL_send_motor_command(serial_object,'VEP')
             return int(encoder_angle_string)
         except:
             print("retrying encoder angle fetch")
