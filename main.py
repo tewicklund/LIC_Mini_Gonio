@@ -1,5 +1,6 @@
-from functions import *
 from parameters_from_user_functions import *
+from run_test_function import *
+
 
 warm_up_time_seconds=5
 

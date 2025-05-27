@@ -63,3 +63,18 @@ def get_log_file_name():
             print("File name must end with .csv")
             continue
         return name
+
+def get_uut_lx_value_from_user():
+    #get number of angles btwn 0 and 180 to test at, for example a value of 3 would mean test at 0, 90, and 180
+    uut_lux_value_valid=False
+    while not uut_lux_value_valid:
+        uut_lux_value_input=input("Enter UUT lux value integer: ")
+        try:
+            uut_lux_value=int(uut_lux_value_input)
+            if uut_lux_value>=0:
+                uut_lux_value_valid=True
+            else:
+                print("Invalid number of angles, try again")
+        except:
+            print("Invalid number of angles, try again")
+    return uut_lux_value
