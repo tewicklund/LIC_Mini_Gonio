@@ -1,5 +1,7 @@
 import serial
+import time
 
+command=input('Enter Command without @0 or /r/n: ')
 # Open the serial port
 ser = serial.Serial(
     port='/dev/ttyUSB0',  # or COMx on Windows
@@ -11,8 +13,9 @@ ser = serial.Serial(
 )
 
 # Send a known-good command (e.g., read inputs)
-command = '@0VEP\r\n'
+command = '@0'+command+'\r\n'
 ser.write(command.encode())
+time.sleep(0.1)
 
 # Read the response
 response = ser.read(64)  # Adjust byte count as needed
