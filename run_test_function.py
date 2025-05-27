@@ -2,6 +2,7 @@ from PCL_functions import *
 from T10A_functions import *
 from arduino_functions import *
 from parameters_from_user_functions import *
+import numpy as np
 
 def run_test(light_voltage,PCL_serial_port,t10a_serial_port,arduino_serial_port,warm_up_time,num_angles,output_csv_location,user_input_lux_bool,demo_mode):
 
