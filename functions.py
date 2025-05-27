@@ -77,7 +77,7 @@ def PCL_establish_serial_connection(com_port):
 
 def PCL_send_other_command(serial_object,command):
     # build command using appropriate syntax
-    command_string=+command+'\r\n'
+    command_string=command+'\r\n'
 
     # convert command to ascii string of bytes
     command_string_bytes=bytes(command_string,'ascii')
