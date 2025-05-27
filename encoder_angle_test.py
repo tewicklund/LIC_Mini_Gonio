@@ -1,7 +1,21 @@
-from functions import *
+import serial
 
-PCL_serial=PCL_establish_serial_connection('/dev/ttyUSB0')
+# Open the serial port
+ser = serial.Serial(
+    port='/dev/ttyUSB0',  # or COMx on Windows
+    baudrate=38400,
+    bytesize=serial.EIGHTBITS,
+    parity=serial.PARITY_NONE,
+    stopbits=serial.STOPBITS_ONE,
+    timeout=1  # seconds
+)
 
-response=PCL_send_other_command(PCL_serial,'VEP')
+# Send a known-good command (e.g., read inputs)
+command = '@0IR\r\n'
+ser.write(command.encode())
 
-print(response)
+# Read the response
+response = ser.read(64)  # Adjust byte count as needed
+print("Response:", response.decode(errors='ignore'))
+
+ser.close()
