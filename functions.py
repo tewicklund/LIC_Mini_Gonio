@@ -75,7 +75,37 @@ def PCL_establish_serial_connection(com_port):
         print(f"Error opening serial port: {e}")
         return None
 
-def PCL_send_motor_command(serial_object,command):
+def PCL_send_other_command(serial_object,command):
+    # build command using appropriate syntax
+    command_string=+command+'\r\n'
+
+    # convert command to ascii string of bytes
+    command_string_bytes=bytes(command_string,'ascii')
+
+    # write ascii command to unit
+    serial_object.write(command_string_bytes)
+    #print("Wrote command:",command_string_bytes)
+
+    #short delay to wait for response
+    time.sleep(0.01)
+
+    # read in response as bytes
+    received_string_bytes=serial_object.read_all()
+
+    # decode the response
+    response_string=received_string_bytes.decode().removesuffix('\r').removeprefix(' ')
+
+    # print response if there is one
+    # if response_string == '':
+    #     print("No response received")
+        
+    # else:
+    #     print("Response received:",response_string)
+
+    # return the response string
+    return response_string
+
+def PCL_send_motor_command(serial_object,command,is_motor_command):
     # build command using appropriate syntax
     command_string='@0X'+command+'\r\n'
 
