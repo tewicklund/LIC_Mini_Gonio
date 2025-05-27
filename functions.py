@@ -339,7 +339,7 @@ def get_detailed_serial_ports_list():
     for port in ports:
         print(f"Device: {port.device}, Description: {port.description}, HWID: {port.hwid}")
 
-def run_test(light_voltage,PCL_serial_port,t10a_serial_port,arduino_serial_port,warm_up_time,num_angles,output_csv_location,user_input,demo_mode):
+def run_test(light_voltage,PCL_serial_port,t10a_serial_port,arduino_serial_port,warm_up_time,num_angles,output_csv_location,user_input_lux_bool,demo_mode):
 
     # start serial connection
     PCL_serial=PCL_establish_serial_connection(PCL_serial_port)
@@ -391,7 +391,7 @@ def run_test(light_voltage,PCL_serial_port,t10a_serial_port,arduino_serial_port,
             lx_value_rounded=round(lx_value,2)
             encoder_value=PCL_get_encoder_angle(PCL_serial)
             dimming_voltage_value=get_voltage_from_arduino(arduino_serial)
-            if user_input:
+            if user_input_lux_bool:
                 uut_lx_value=get_uut_lx_value_from_user()
             else:
                 uut_lx_value='0'
