@@ -104,7 +104,7 @@ def PCL_home_motor(serial_object):
     while not homing_complete:
         motor_busy_string=PCL_send_motor_command(serial_object,'VF')
         print(repr(motor_busy_string))
-        if motor_busy_string=='0':
+        if motor_busy_string=='0\r':
             homing_complete=True
         else:
             homing_complete=False
