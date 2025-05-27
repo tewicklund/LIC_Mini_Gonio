@@ -107,7 +107,7 @@ def PCL_home_motor(serial_object):
     # set the various speed values
     PCL_send_command_no_response(serial_object,'B250')
     PCL_send_command_no_response(serial_object,'J750')
-    PCL_send_command_no_response(serial_object,'M750')
+    PCL_send_command_no_response(serial_object,'M1500')
 
     # set direction of travel toward the home switch
     PCL_send_command_no_response(serial_object,'-')
