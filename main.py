@@ -3,15 +3,15 @@ from parameters_from_user_functions import *
 
 warm_up_time_seconds=5
 
-user_input_lux_bool=get_user_lux_mode()
-
 demo_mode=get_demo_mode()
 
 if not demo_mode:
+    user_input_lux_bool=get_user_lux_mode()
     light_voltage=get_light_voltage()
     num_angles=get_num_angles()
     log_file_name=get_log_file_name()
 else:
+    user_input_lux_bool=False
     light_voltage=12
     num_angles=2
     log_file_name='mini_gonio_demo_log.csv'
