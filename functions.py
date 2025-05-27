@@ -75,6 +75,22 @@ def PCL_establish_serial_connection(com_port):
         print(f"Error opening serial port: {e}")
         return None
 
+def PCL_send_command_with_response(serial_object,command_string):
+    command="@0X"+command_string+"\r\n"
+    serial_object.write(command.encode())
+    time.sleep(0.1)
+
+    # Read the response
+    response = serial_object.read(64)  # Adjust byte count as needed
+    response_string=response.decode(errors='ignore')
+    #print("Response:", response.decode(errors='ignore'))
+    return response_string
+
+def PCL_send_command_no_response(serial_object,command_string):
+    command="@0X"+command_string+"\r\n"
+    serial_object.write(command.encode())
+    time.sleep(0.1)
+
 
 def PCL_send_motor_command(serial_object,command_string):
     command="@0X"+command_string+"\r\n"
@@ -89,20 +105,20 @@ def PCL_send_motor_command(serial_object,command_string):
 
 def PCL_home_motor(serial_object):
     # set the various speed values
-    PCL_send_motor_command(serial_object,'B250')
-    PCL_send_motor_command(serial_object,'J750')
-    PCL_send_motor_command(serial_object,'M750')
+    PCL_send_command_no_response(serial_object,'B250')
+    PCL_send_command_no_response(serial_object,'J750')
+    PCL_send_command_no_response(serial_object,'M750')
 
     # set direction of travel toward the home switch
-    PCL_send_motor_command(serial_object,'-')
+    PCL_send_command_no_response(serial_object,'-')
     time.sleep(0.1)
-    PCL_send_motor_command(serial_object,'H1')
+    PCL_send_command_no_response(serial_object,'H1')
 
 
     # wait till the motor is finished homing, check back every second
     homing_complete=False
     while not homing_complete:
-        motor_busy_string=PCL_send_motor_command(serial_object,'VF')
+        motor_busy_string=PCL_send_command_with_response(serial_object,'VF')
         print(repr(motor_busy_string))
         if motor_busy_string=='0\r':
             homing_complete=True
@@ -112,23 +128,23 @@ def PCL_home_motor(serial_object):
     
 
     # set the encoder and absolute positions to zero
-    PCL_send_motor_command(serial_object,'ET')
-    PCL_send_motor_command(serial_object,'Z0')
+    PCL_send_command_no_response(serial_object,'ET')
+    PCL_send_command_no_response(serial_object,'Z0')
 
     # enable and set encoder autocorrect parameters
-    PCL_send_motor_command(serial_object,'EA1')
-    PCL_send_motor_command(serial_object,'ED1000')
-    PCL_send_motor_command(serial_object,'EM1')
-    PCL_send_motor_command(serial_object,'ER4')
-    PCL_send_motor_command(serial_object,'EW10')
+    PCL_send_command_no_response(serial_object,'EA1')
+    PCL_send_command_no_response(serial_object,'ED1000')
+    PCL_send_command_no_response(serial_object,'EM1')
+    PCL_send_command_no_response(serial_object,'ER4')
+    PCL_send_command_no_response(serial_object,'EW10')
     
 
 def PCL_get_encoder_angle(serial_object):
-    encoder_angle_string=PCL_send_motor_command(serial_object,'VEP')
+    encoder_angle_string=PCL_send_command_with_response(serial_object,'VEP')
     tries=0
     while tries<10:
         try:
-            encoder_angle_string=PCL_send_motor_command(serial_object,'VEP')
+            encoder_angle_string=PCL_send_command_with_response(serial_object,'VEP')
             return int(encoder_angle_string)
         except:
             print("retrying encoder angle fetch")
@@ -137,13 +153,13 @@ def PCL_get_encoder_angle(serial_object):
 
 def PCL_go_to_angle(serial_object, angle_steps):
     command_string='P'+str(angle_steps)
-    PCL_send_motor_command(serial_object,command_string)
-    PCL_send_motor_command(serial_object,'G')
+    PCL_send_command_no_response(serial_object,command_string)
+    PCL_send_command_no_response(serial_object,'G')
 
     # wait till the motor is finished moving, check back every second
     moving_complete=False
     while not moving_complete:
-        motor_busy_string=PCL_send_motor_command(serial_object,'VF')
+        motor_busy_string=PCL_send_command_with_response(serial_object,'VF')
         if motor_busy_string=='0':
             moving_complete=True
         else:
@@ -153,18 +169,18 @@ def PCL_go_to_angle(serial_object, angle_steps):
 
 def PCL_set_motor_speed(serial_object, speed):
     command_string='M'+str(speed)
-    PCL_send_motor_command(serial_object,command_string)
+    PCL_send_command_no_response(serial_object,command_string)
     command_string='J'+str(speed)
-    PCL_send_motor_command(serial_object,command_string)
+    PCL_send_command_no_response(serial_object,command_string)
     time.sleep(0.1)
 
 def PCL_turn_light_on(serial_object,light_number):
     if (light_number>=1 or light_number<=5):
         light_byte_value=pow(2,light_number)
-    PCL_send_motor_command(serial_object,'OR'+str(light_byte_value))
+    PCL_send_command_no_response(serial_object,'OR'+str(light_byte_value))
 
 def PCL_turn_lights_off(serial_object):
-    PCL_send_motor_command(serial_object,'OR0')
+    PCL_send_command_no_response(serial_object,'OR0')
 
 
 
