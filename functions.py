@@ -160,7 +160,7 @@ def PCL_go_to_angle(serial_object, angle_steps):
     moving_complete=False
     while not moving_complete:
         motor_busy_string=PCL_send_command_with_response(serial_object,'VF')
-        if motor_busy_string=='0':
+        if motor_busy_string=='0\r':
             moving_complete=True
         else:
             moving_complete=False
