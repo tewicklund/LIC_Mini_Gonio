@@ -20,7 +20,8 @@ else:
 #COM port names: plug in PCL first, then T10A, then arduino
 PCL_port_name='/dev/ttyUSB0'
 T10A_port_name='/dev/ttyUSB1'
-dimming_arduino_port_name='/dev/ttyUSB2'
+#dimming_arduino_port_name='/dev/ttyUSB2'
+dimming_arduino_port_name='/dev/ttyACM0'
 
 
 #run test
