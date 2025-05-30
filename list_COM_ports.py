@@ -1,4 +1,4 @@
-import serial
+import serial.tools.list_ports
 
 # Get a list of available ports
 ports = serial.tools.list_ports.comports()
