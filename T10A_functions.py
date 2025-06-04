@@ -19,7 +19,7 @@ def t10a_translate_response(response):
     # print("Checking for error information...")
     error_code = response[6]  # Indexing starts from 0 in Python, so 7th position is index 6
     if error_code == 32:  # space
-        #print("Normal Operation: no errors detected")
+        print("Normal Operation: no errors detected")
         pass
     elif error_code == 49:  # 1
         print("Error: Receptor head power is switched off")
@@ -71,7 +71,7 @@ def t10a_translate_response(response):
 
     # Calculate the final measurement
     measurement = measurement * exponent * flag
-    #print(measurement,exponent,flag)
+    print(measurement,exponent,flag)
     return measurement
 
 def t10a_bcc_calc(km_head, command, param):
