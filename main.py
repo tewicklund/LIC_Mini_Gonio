@@ -2,7 +2,7 @@ from parameters_from_user_functions import *
 from run_test_function import *
 
 
-warm_up_time_seconds=5
+warm_up_time_seconds=180
 
 demo_mode=get_demo_mode()
 
