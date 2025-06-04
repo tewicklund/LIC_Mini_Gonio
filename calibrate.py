@@ -21,10 +21,10 @@ PCL_home_motor(PCL_serial)
 PCL_go_to_angle(PCL_serial,angle_steps)
 
 #wait 3 minutes for lamp to warm up
-print("Lamp warming up")
-for second in range(180):
-    print(180-second)
-    time.sleep(1)
+# print("Lamp warming up")
+# for second in range(180):
+#     print(180-second)
+#     time.sleep(1)
 
 while True:
     dimming_voltage_value=get_voltage_from_arduino(arduino_serial)

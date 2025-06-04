@@ -36,8 +36,8 @@ def get_voltage_from_arduino(ser):
     # Decode and clean the response
     response_str = response.decode('utf-8').strip()
     try:
-        value = float(response_str)
+        value = int(response_str)
     except ValueError:
-        raise ValueError(f"Received data is not a valid float: {response_str}")
+        raise ValueError(f"Received data is not a valid int: {response_str}")
     
     return value
