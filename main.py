@@ -20,10 +20,11 @@ else:
 #COM port names: plug in PCL first, then T10A, then arduino
 PCL_port_name='/dev/ttyUSB0'
 T10A_port_name='/dev/ttyUSB1'
-#dimming_arduino_port_name='/dev/ttyUSB2'
 dimming_arduino_port_name='/dev/ttyACM0'
+xitron_serial_port_name='/dev/ttyUSB2'
+
 
 
 #run test
-run_test(light_voltage,PCL_port_name,T10A_port_name,dimming_arduino_port_name,warm_up_time_seconds,num_angles,log_file_name,user_input_lux_bool,demo_mode)
+run_test(light_voltage,PCL_port_name,T10A_port_name,dimming_arduino_port_name,xitron_serial_port_name,warm_up_time_seconds,num_angles,log_file_name,user_input_lux_bool,demo_mode)
 
