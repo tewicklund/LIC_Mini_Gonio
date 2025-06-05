@@ -34,7 +34,7 @@ def run_test(light_voltage,PCL_serial_port,t10a_serial_port,arduino_serial_port,
     f=open(output_csv_location,"w")
     f.write('Ambient Lux: '+str(lx_value)+'\n')
     f.write('Voltage: '+str(light_voltage)+'\n')
-    f.write('Target Angle,Encoder Reading,Lux Value,Dimming Voltage,UUT Lux Value'+column_label_string)
+    f.write('Target Angle,Encoder Reading,Lux Value,Dimming Voltage,UUT Lux Value,'+column_label_string)
     f.close()
 
     #set motor base speed and max speed
