@@ -57,7 +57,7 @@ def t10a_translate_response(response):
 
     # Handle potential leading space in the data
     if response[10] == 32:  # if the data starts with a space
-        measurement_str = ''.join(chr(response[i]) for i in range(11, 15) if response[i] != 32)
+        measurement_str = ''.join(chr(response[i]) for i in range(11, 14) if response[i] != 32)
         measurement = int(measurement_str)
     else:  # it's just a normal number
         measurement_str = ''.join(chr(response[i]) for i in range(10, 14))
@@ -70,6 +70,7 @@ def t10a_translate_response(response):
     
 
     # Calculate the final measurement
+    print(measurement,exponent,flag)
     measurement = measurement * exponent * flag
     print(measurement,exponent,flag)
     return measurement
