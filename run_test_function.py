@@ -1,6 +1,6 @@
 from PCL_functions import *
 from T10A_functions import *
-from arduino_functions import *
+#from arduino_functions import *
 from parameters_from_user_functions import *
 from xitron_functions import *
 import numpy as np
@@ -10,7 +10,7 @@ def run_test(light_voltage,PCL_serial_port,t10a_serial_port,arduino_serial_port,
     # start serial connection
     PCL_serial=PCL_establish_serial_connection(PCL_serial_port)
     t10a_serial=T10A_establish_serial_connection(t10a_serial_port)
-    arduino_serial=dimming_arduino_establish_serial_connection(arduino_serial_port)
+    #arduino_serial=dimming_arduino_establish_serial_connection(arduino_serial_port)
     xitron_serial=xitron_establish_serial_connection(xitron_serial_port)
     t10a_init(t10a_serial)
 
@@ -34,7 +34,7 @@ def run_test(light_voltage,PCL_serial_port,t10a_serial_port,arduino_serial_port,
     f=open(output_csv_location,"w")
     f.write('Ambient Lux: '+str(lx_value)+'\n')
     f.write('Voltage: '+str(light_voltage)+'\n')
-    f.write('Target Angle,Encoder Reading,Lux Value,Dimming Voltage,UUT Lux Value,'+column_label_string)
+    f.write('Target Angle,Encoder Reading,Lux Value,UUT Lux Value,'+column_label_string)
     f.close()
 
     #set motor base speed and max speed
@@ -63,7 +63,7 @@ def run_test(light_voltage,PCL_serial_port,t10a_serial_port,arduino_serial_port,
             lx_value=t10a_get_lx_measurement(t10a_serial)
             lx_value_rounded=round(lx_value,2)
             encoder_value=PCL_get_encoder_angle(PCL_serial)
-            dimming_voltage_value=get_voltage_from_arduino(arduino_serial)
+            #dimming_voltage_value=get_voltage_from_arduino(arduino_serial)
             xitron_response=xitron_send_command(query_string,xitron_serial)
             if user_input_lux_bool:
                 uut_lx_value=get_uut_lx_value_from_user()
@@ -71,7 +71,7 @@ def run_test(light_voltage,PCL_serial_port,t10a_serial_port,arduino_serial_port,
                 uut_lx_value='0'
             # put code here to get the reading from the UUT's daylight sensor
             f=open(output_csv_location,"a")
-            f.write(str(angle)+','+str(encoder_value)+','+str(lx_value_rounded)+','+str(dimming_voltage_value)+','+str(uut_lx_value)+','+xitron_response)
+            f.write(str(angle)+','+str(encoder_value)+','+str(lx_value_rounded)+','+str(uut_lx_value)+','+xitron_response)
             f.close()
         
         f=open(output_csv_location,"a")
