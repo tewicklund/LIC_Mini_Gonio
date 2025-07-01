@@ -18,10 +18,10 @@ else:
     log_file_name='mini_gonio_demo_log.csv'
 
 #COM port names: plug in PCL first, then T10A, then arduino
-PCL_port_name='/dev/ttyUSB0'
-T10A_port_name='/dev/ttyUSB1'
+PCL_port_name='/dev/ttyUSB1'
+T10A_port_name='/dev/ttyUSB2'
 #dimming_arduino_port_name='/dev/ttyACM0'
-xitron_serial_port_name='/dev/ttyUSB2'
+xitron_serial_port_name='/dev/ttyUSB3'
 
 
 
