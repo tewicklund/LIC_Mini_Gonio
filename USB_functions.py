@@ -62,8 +62,8 @@ for COM_port in COM_ports:
             print(f"Xitron not found on {COM_port.device}")
         xitron_serial.close()
     
-    except serial.SerialException as e:
-        print(f"Serial error: {e}")
+    except:
+        print(f"Xitron not found on {COM_port.device}")
 
     
     

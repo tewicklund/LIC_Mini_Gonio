@@ -2,7 +2,7 @@ import serial
 import time
 
 def xitron_establish_serial_connection(serial_port):
-    xitron_serial = serial.Serialserial.Serial(
+    xitron_serial = serial.Serial(
         port=serial_port,
         baudrate=115200,       # Adjust to 115200 if your unit is configured that way
         bytesize=serial.EIGHTBITS,
