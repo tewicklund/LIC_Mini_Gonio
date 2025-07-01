@@ -26,11 +26,12 @@ for COM_port in COM_ports:
             print(f"PCL found on {PCL_port}")
         else:
             print(f"PCL not found on {COM_port.device}")
+        PCL_serial.close()
             
     except:
         print(f"PCL not found on {COM_port.device}")
 
-    PCL_serial.close()
+    
 
     # Check if port is T10A
     try:
@@ -42,11 +43,12 @@ for COM_port in COM_ports:
             print(f"T10A found on {t10a_port}")
         else:
             print(f"T10A not found on {COM_port.device}")
+        T10A_serial.close()
     
     except:
         print(f"T10A not found on {COM_port.device}")
 
-    T10A_serial.close()
+    
 
     #Check if port is xitron
     try:
@@ -58,9 +60,10 @@ for COM_port in COM_ports:
             print(f"Xitron found on {xitron_port}")
         else:
             print(f"Xitron not found on {COM_port.device}")
+        xitron_serial.close()
     
     except:
         print(f"Xitron not found on {COM_port.device}")
 
-    xitron_serial.close()
+    
     
