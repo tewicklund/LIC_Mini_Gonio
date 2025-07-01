@@ -1,4 +1,5 @@
 import serial.tools.list_ports
+import time
 
 # Get a list of available ports
 COM_ports = serial.tools.list_ports.comports()
@@ -20,7 +21,8 @@ for COM_port in COM_ports:
 
         # Read the response
         response = PCL_serial.read(64)  # Adjust byte count as needed
-        print("Response:", response.decode(errors='ignore'))
+        time.sleep(0.1)
+        print("Response:", response.decode())
 
         print(f"PCL found on {COM_port.device}")
 
