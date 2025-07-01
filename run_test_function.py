@@ -71,7 +71,7 @@ def run_test(light_voltage,PCL_serial_port,t10a_serial_port,xitron_serial_port,w
                 uut_lx_value='0'
             # put code here to get the reading from the UUT's daylight sensor
             f=open(output_csv_location,"a")
-            f.write(str(angle)+','+str(encoder_value)+','+str(lx_value_rounded)+','+str(uut_lx_value)+','+xitron_response)
+            f.write(str(angle)+','+str(encoder_value)+','+str(lx_value_rounded)+','+str(uut_lx_value)+','+xitron_response.decode())
             f.close()
         
         f=open(output_csv_location,"a")
