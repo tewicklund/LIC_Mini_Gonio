@@ -1,21 +1,25 @@
 from PCL_functions import *
 from T10A_functions import *
-#from arduino_functions import *
 from parameters_from_user_functions import *
 from xitron_functions import *
 import numpy as np
 
-def run_test(light_voltage,PCL_serial_port,t10a_serial_port,xitron_serial_port,warm_up_time,num_angles,output_csv_location,user_input_lux_bool,demo_mode):
+def run_test(PCL_serial_port,t10a_serial_port,xitron_serial_port,output_csv_location,demo_mode):
 
     # start serial connection
     PCL_serial=PCL_establish_serial_connection(PCL_serial_port)
     t10a_serial=T10A_establish_serial_connection(t10a_serial_port)
-    #arduino_serial=dimming_arduino_establish_serial_connection(arduino_serial_port)
     xitron_serial=xitron_establish_serial_connection(xitron_serial_port)
     t10a_init(t10a_serial)
 
 
     # setup lists used during test
+    if demo_mode:
+        num_angles=3
+        warm_up_time=0
+    else:
+        num_angles=37
+        warm_up_time=180
     angles=np.linspace(0,180,num_angles,endpoint=True,dtype=int)
     lights=[1,2,3,4,5]
 
@@ -33,8 +37,7 @@ def run_test(light_voltage,PCL_serial_port,t10a_serial_port,xitron_serial_port,w
     # format output file with ambient light and column labels
     f=open(output_csv_location,"w")
     f.write('Ambient Lux: '+str(lx_value)+'\n')
-    f.write('Voltage: '+str(light_voltage)+'\n')
-    f.write('Target Angle,Encoder Reading,Lux Value,UUT Lux Value,'+column_label_string)
+    f.write('Target Angle,Encoder Reading,Lux Value,'+column_label_string)
     f.close()
 
     #set motor base speed and max speed
@@ -63,15 +66,9 @@ def run_test(light_voltage,PCL_serial_port,t10a_serial_port,xitron_serial_port,w
             lx_value=t10a_get_lx_measurement(t10a_serial)
             lx_value_rounded=round(lx_value,2)
             encoder_value=PCL_get_encoder_angle(PCL_serial)
-            #dimming_voltage_value=get_voltage_from_arduino(arduino_serial)
             xitron_response=xitron_send_command(query_string,xitron_serial)
-            if user_input_lux_bool:
-                uut_lx_value=get_uut_lx_value_from_user()
-            else:
-                uut_lx_value='0'
-            # put code here to get the reading from the UUT's daylight sensor
             f=open(output_csv_location,"a")
-            f.write(str(angle)+','+str(encoder_value)+','+str(lx_value_rounded)+','+str(uut_lx_value)+','+xitron_response.decode())
+            f.write(str(angle)+','+str(encoder_value)+','+str(lx_value_rounded)+','+xitron_response.decode())
             f.close()
         
         f=open(output_csv_location,"a")
