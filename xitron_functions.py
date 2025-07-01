@@ -12,11 +12,12 @@ def xitron_establish_serial_connection(serial_port):
     )
     # Check if the serial port is open
     if xitron_serial.is_open:
-        print(f"Serial connection established on {xitron_serial.port}")
+        #print(f"Serial connection established on {xitron_serial.port}")
+        return xitron_serial
     else:
-        print("Failed to open serial port.")
+        #print("Failed to open serial port.")
+        return None
 
-    return xitron_serial
 
 def xitron_send_command(command_string,xitron_serial):
     xitron_serial.write(command_string.encode("ascii"))

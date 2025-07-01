@@ -19,7 +19,7 @@ def t10a_translate_response(response):
     # print("Checking for error information...")
     error_code = response[6]  # Indexing starts from 0 in Python, so 7th position is index 6
     if error_code == 32:  # space
-        print("Normal Operation: no errors detected")
+        #print("Normal Operation: no errors detected")
         pass
     elif error_code == 49:  # 1
         print("Error: Receptor head power is switched off")
@@ -30,7 +30,8 @@ def t10a_translate_response(response):
     elif error_code == 53:  # 5
         print("Error: Measurement value over error")
     elif error_code == 55:  # 7
-        print("Normal Operation: no errors detected")
+        #print("Normal Operation: no errors detected")
+        pass
 
     # Figure out measurement range
     range_code = response[7]
@@ -70,9 +71,9 @@ def t10a_translate_response(response):
     
 
     # Calculate the final measurement
-    print(measurement,exponent,flag)
+    #print(measurement,exponent,flag)
     measurement = measurement * exponent * flag
-    print(measurement,exponent,flag)
+    #print(measurement,exponent,flag)
     return measurement
 
 def t10a_bcc_calc(km_head, command, param):
@@ -137,6 +138,6 @@ def t10a_init(serial_object):
     command = '54'
     params = '1   '
     response = t10a_send_command(serial_object, head, command, params)
-    print("PC connection mode response:", response.decode())
+    #print("PC connection mode response:", response.decode())
     return response
     

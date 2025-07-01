@@ -17,10 +17,10 @@ def PCL_establish_serial_connection(com_port):
         # Check if the serial port is open
         if ser.is_open:
             print(f"Serial connection established on {ser.port}")
+            return ser
         else:
             print("Failed to open serial port.")
-
-        return ser
+            return None
 
     except serial.SerialException as e:
         print(f"Error opening serial port: {e}")
