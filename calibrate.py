@@ -1,14 +1,12 @@
 from run_test_function import *
 
 #serial port names
-PCL_port_name='/dev/ttyUSB0'
-T10A_port_name='/dev/ttyUSB1'
-dimming_arduino_port_name='/dev/ttyACM0'
+PCL_port_name='/dev/ttyUSB1'
+T10A_port_name='/dev/ttyUSB0'
 
 #establish serial comms
 PCL_serial=PCL_establish_serial_connection(PCL_port_name)
 t10a_serial=T10A_establish_serial_connection(T10A_port_name)
-#arduino_serial=dimming_arduino_establish_serial_connection(dimming_arduino_port_name)
 t10a_init(t10a_serial)
 
 #turn on center light
