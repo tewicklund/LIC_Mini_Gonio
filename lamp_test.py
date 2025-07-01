@@ -1,7 +1,7 @@
 from parameters_from_user_functions import *
 from run_test_function import *
 
-PCL_port_name='/dev/ttyUSB0'
+PCL_port_name='/dev/ttyUSB1'
 PCL_serial=PCL_establish_serial_connection(PCL_port_name)
 
 while True:
