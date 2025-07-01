@@ -5,7 +5,7 @@ from parameters_from_user_functions import *
 from xitron_functions import *
 import numpy as np
 
-def run_test(light_voltage,PCL_serial_port,t10a_serial_port,arduino_serial_port,xitron_serial_port,warm_up_time,num_angles,output_csv_location,user_input_lux_bool,demo_mode):
+def run_test(light_voltage,PCL_serial_port,t10a_serial_port,xitron_serial_port,warm_up_time,num_angles,output_csv_location,user_input_lux_bool,demo_mode):
 
     # start serial connection
     PCL_serial=PCL_establish_serial_connection(PCL_serial_port)
