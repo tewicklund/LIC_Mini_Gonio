@@ -51,7 +51,7 @@ for COM_port in COM_ports:
     #Check if port is xitron
     try:
         xitron_serial=xitron_establish_serial_connection(COM_port.device)
-        response=xitron_send_command("*IDN?\n",xt_serial)
+        response=xitron_send_command("*IDN?\n",xitron_serial)
         print("XT2640 Response:", response)
         if response != b'':
             xitron_port=COM_port.device
