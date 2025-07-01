@@ -138,3 +138,5 @@ def t10a_init(serial_object):
     params = '1   '
     response = t10a_send_command(serial_object, head, command, params)
     print("PC connection mode response:", response.decode())
+    return response
+    
