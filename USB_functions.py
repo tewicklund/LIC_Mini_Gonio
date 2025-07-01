@@ -40,6 +40,8 @@ for COM_port in COM_ports:
         if response != b'':
             t10a_port=COM_port.device
             print(f"T10A found on {t10a_port}")
+        else:
+            print(f"T10A not found on {COM_port.device}")
     
     except:
         print(f"T10A not found on {COM_port.device}")
@@ -49,11 +51,15 @@ for COM_port in COM_ports:
     #Check if port is xitron
     try:
         xitron_serial=xitron_establish_serial_connection(COM_port.device)
-        command_string="*IDN?"
-        xitron_serial.write(command_string.encode("ascii"))
-        received_string=xitron_serial.readline()
-        print(f"Xitron response: {received_string}")
-        print(f"Xitron found on {COM_port.device}")
+        xitron_serial.write(b'*IDN?\r')
+        time.sleep(0.1)
+        response = xitron_serial.read(64)  # Adjust as needed
+        print("XT2640 Response:", response)
+        if response != b'':
+            xitron_port=COM_port.device
+            print(f"Xitron found on {xitron_port}")
+        else:
+            print(f"Xitron not found on {COM_port.device}")
     
     except:
         print(f"Xitron not found on {COM_port.device}")
