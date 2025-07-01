@@ -34,7 +34,7 @@ for COM_port in COM_ports:
     # Check if port is T10A
     try:
         T10A_serial = T10A_establish_serial_connection(COM_port.device)
-        response=t10a_init(COM_port.device)
+        response=t10a_init(T10A_serial)
         print(response)
         print(f"T10A found on {COM_port.device}")
     
