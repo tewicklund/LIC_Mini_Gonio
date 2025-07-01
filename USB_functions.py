@@ -15,7 +15,7 @@ for COM_port in COM_ports:
             stopbits=serial.STOPBITS_ONE,
             timeout=1  # seconds
         )
-        identify_command="*IDN?\r"
+        identify_command="@0$\r"
         PCL_serial.write(identify_command.encode())
 
         # Read the response
