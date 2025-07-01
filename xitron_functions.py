@@ -30,19 +30,9 @@ try:
         timeout=1            # 1 second read timeout
     )
 
-    if xt_serial.is_open:
-        print(f"Connected to XT2640 on {XT2640_PORT}")
-        
-        # Send *IDN? command
-        xt_serial.write(b'*IDN?\r')
-        time.sleep(0.1)  # Wait for response
-
-        response = xt_serial.read(128)  # Read response (increase buffer size if needed)
-        print("XT2640 Response:", response.decode(errors='replace').strip())
-
-        xt_serial.close()
-    else:
-        print(f"Failed to open port {XT2640_PORT}")
+    response=xitron_send_command("*IDN?\n",xt_serial)
+    time.sleep(0.1)
+    print(response)
 
 except serial.SerialException as e:
     print(f"Serial error: {e}")
