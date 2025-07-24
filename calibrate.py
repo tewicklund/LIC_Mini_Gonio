@@ -10,13 +10,13 @@ t10a_serial=T10A_establish_serial_connection(T10A_port_name)
 t10a_init(t10a_serial)
 
 #turn on center light
-PCL_turn_light_on(PCL_serial,3)
+#PCL_turn_light_on(PCL_serial,3)
 
 #move to center position
-angle=90
-angle_steps=int(angle/0.009)
-PCL_home_motor(PCL_serial)
-PCL_go_to_angle(PCL_serial,angle_steps)
+# angle=90
+# angle_steps=int(angle/0.009)
+# PCL_home_motor(PCL_serial)
+# PCL_go_to_angle(PCL_serial,angle_steps)
 
 
 while True:
