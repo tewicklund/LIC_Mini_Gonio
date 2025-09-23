@@ -68,7 +68,7 @@ def run_test(PCL_serial_port,t10a_serial_port,xitron_serial_port,output_csv_loca
             encoder_value=PCL_get_encoder_angle(PCL_serial)
             xitron_response=xitron_send_command(query_string,xitron_serial)
             f=open(output_csv_location,"a")
-            f.write(str(angle)+','+str(encoder_value)+','+str(lx_value_rounded)+','+xitron_response.decode())
+            f.write(str(angle)+','+str(encoder_value)+','+str(lx_value_rounded)+','+xitron_response.decode()+'\n')
             f.close()
         
         f=open(output_csv_location,"a")
