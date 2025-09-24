@@ -28,9 +28,16 @@ def run_test(PCL_serial_port,t10a_serial_port,xitron_serial_port,output_csv_loca
     lx_value=t10a_get_lx_measurement(t10a_serial)
 
     #xitron prep
-    query_string="read=volts[a],amps[a],watts[a],freq[a],PF[a],V-CF[a],A-CF[a],V-HARMS[a,1,13],volts[b],amps[b],watts[b],freq[b],PF[b],V-CF[b],A-CF[b],V-HARMS[b,1,13]\n"
-    column_label_string=query_string.removeprefix("read=").replace("V-HARMS[a,1,13],","FUNDA,HARM2A,HARM3A,HARM4A,HARM5A,HARM6A,HARM7A,HARM8A,HARM9A,HARM10A,HARM11A,HARM12A,HARM13A,").replace("V-HARMS[b,1,13]","FUNDB,HARM2B,HARM3B,HARM4B,HARM5B,HARM6B,HARM7B,HARM8B,HARM9B,HARM10B,HARM11B,HARM12B,HARM13B")
+    #query_string="read=volts[a],amps[a],watts[a],freq[a],PF[a],V-CF[a],A-CF[a],V-HARMS[a,1,13],volts[b],amps[b],watts[b],freq[b],PF[b],V-CF[b],A-CF[b],V-HARMS[b,1,13]\n"
+    #column_label_string=query_string.removeprefix("read=").replace("V-HARMS[a,1,13],","FUNDA,HARM2A,HARM3A,HARM4A,HARM5A,HARM6A,HARM7A,HARM8A,HARM9A,HARM10A,HARM11A,HARM12A,HARM13A,").replace("V-HARMS[b,1,13]","FUNDB,HARM2B,HARM3B,HARM4B,HARM5B,HARM6B,HARM7B,HARM8B,HARM9B,HARM10B,HARM11B,HARM12B,HARM13B")
 
+    #get query string from file
+    f=open('query_string.txt','r')
+    query_string=f.readline()
+    f.close()
+    print(f'Found query string {query_string}')
+
+    column_label_string=query_string.removeprefix('READ?,')
 
 
 
@@ -68,7 +75,7 @@ def run_test(PCL_serial_port,t10a_serial_port,xitron_serial_port,output_csv_loca
             encoder_value=PCL_get_encoder_angle(PCL_serial)
             xitron_response=xitron_send_command(query_string,xitron_serial)
             f=open(output_csv_location,"a")
-            f.write(str(angle)+','+str(encoder_value)+','+str(lx_value_rounded)+','+xitron_response.decode()+'\n')
+            f.write(str(angle)+','+str(encoder_value)+','+str(lx_value_rounded)+','+xitron_response.decode())
             f.close()
         
         f=open(output_csv_location,"a")
