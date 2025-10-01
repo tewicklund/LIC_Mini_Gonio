@@ -59,7 +59,9 @@ def run_test(PCL_serial_port,t10a_serial_port,xitron_serial_port,output_csv_loca
         PCL_turn_light_on(PCL_serial,light)
         PCL_home_motor(PCL_serial)
         if not demo_mode:
+            print(f"warming up light {light}")
             time.sleep(warm_up_time)
+            
 
         f=open(output_csv_location,"a")
         f.write("Light "+str(light)+'\n')
@@ -68,10 +70,12 @@ def run_test(PCL_serial_port,t10a_serial_port,xitron_serial_port,output_csv_loca
         for angle in angles:
             angle_steps=int(angle/0.009)
             PCL_go_to_angle(PCL_serial,angle_steps)
+            print(f"Light {light} now at position {angle}")
             if not demo_mode:
                 time.sleep(5) #5 seconds for settling, letting the dimming wires adjust to the new light position
             lx_value=t10a_get_lx_measurement(t10a_serial)
             lx_value_rounded=round(lx_value,2)
+            print(f"got lx value {lx_value_rounded}")
             encoder_value=PCL_get_encoder_angle(PCL_serial)
             xitron_response=xitron_send_command(query_string,xitron_serial)
             f=open(output_csv_location,"a")
