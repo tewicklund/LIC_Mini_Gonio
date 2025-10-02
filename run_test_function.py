@@ -23,9 +23,6 @@ def run_test(PCL_serial_port,t10a_serial_port,xitron_serial_port,output_csv_loca
     angles=np.linspace(0,180,num_angles,endpoint=True,dtype=int)
     lights=[1,2,3,4,5]
 
-    # record ambient light reading
-    PCL_turn_lights_off(PCL_serial)
-    lx_value=t10a_get_lx_measurement(t10a_serial)
 
     #xitron prep
     #query_string="read=volts[a],amps[a],watts[a],freq[a],PF[a],V-CF[a],A-CF[a],V-HARMS[a,1,13],volts[b],amps[b],watts[b],freq[b],PF[b],V-CF[b],A-CF[b],V-HARMS[b,1,13]\n"
@@ -43,8 +40,7 @@ def run_test(PCL_serial_port,t10a_serial_port,xitron_serial_port,output_csv_loca
 
     # format output file with ambient light and column labels
     f=open(output_csv_location,"w")
-    f.write('Ambient Lux: '+str(lx_value)+'\n')
-    f.write('Target Angle,Encoder Reading,Lux Value,'+column_label_string)
+    f.write('Light Number,Target Angle,Encoder Reading,Lux Value,'+column_label_string)
     f.close()
 
     #set motor base speed and max speed
@@ -63,9 +59,6 @@ def run_test(PCL_serial_port,t10a_serial_port,xitron_serial_port,output_csv_loca
             time.sleep(warm_up_time)
             
 
-        f=open(output_csv_location,"a")
-        f.write("Light "+str(light)+'\n')
-        f.close()
 
         for angle in angles:
             angle_steps=int(angle/0.009)
@@ -79,12 +72,7 @@ def run_test(PCL_serial_port,t10a_serial_port,xitron_serial_port,output_csv_loca
             encoder_value=PCL_get_encoder_angle(PCL_serial)
             xitron_response=xitron_send_command(query_string,xitron_serial)
             f=open(output_csv_location,"a")
-            f.write(str(angle)+','+str(encoder_value)+','+str(lx_value_rounded)+','+xitron_response.decode())
+            f.write(str(light)+','+str(angle)+','+str(encoder_value)+','+str(lx_value_rounded)+','+xitron_response.decode())
             f.close()
-        
-        f=open(output_csv_location,"a")
-        f.write('\n')
-        f.close()
-
 
     PCL_turn_lights_off(PCL_serial)
