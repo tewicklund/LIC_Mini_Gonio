@@ -13,13 +13,13 @@ t10a_init(t10a_serial)
 PCL_turn_light_on(PCL_serial,3)
 
 #home motor
-PCL_home_motor(PCL_serial)
+#PCL_home_motor(PCL_serial)
 
 #move to center position
-# angle=90
-# angle_steps=int(angle/0.009)
-# PCL_home_motor(PCL_serial)
-# PCL_go_to_angle(PCL_serial,angle_steps)
+angle=90
+angle_steps=int(angle/0.009)
+PCL_home_motor(PCL_serial)
+PCL_go_to_angle(PCL_serial,angle_steps)
 
 
 while True:
